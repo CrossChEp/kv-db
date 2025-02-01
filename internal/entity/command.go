@@ -26,6 +26,9 @@ var (
 )
 
 var (
-	ErrInvalidCommand      = errors.New("provided command is invalid")
-	ErrInvalidAmountOfArgs = errors.New("invalid amount of args provided")
+	ErrInvalidCommand         = errors.New("provided command is invalid")
+	ErrInvalidAmountOfArgs    = errors.New("invalid amount of args provided")
+	ErrInvalidArgumentSymbols = errors.New(
+		"invalid argument symbols, you can enter only letters, numbers, '/', '*' and '_'",
+	)
 )

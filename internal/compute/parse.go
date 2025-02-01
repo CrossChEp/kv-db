@@ -60,7 +60,7 @@ func validateQuery(command entity.Command, args []string) error {
 
 	if argQuantity := entity.CommandToArgQuantity[command]; len(args) != argQuantity {
 		return fmt.Errorf(
-			"%w:  command %s requires %d amount of arguments",
+			"%w: command %s requires %d amount of arguments",
 			entity.ErrInvalidAmountOfArgs,
 			command,
 			argQuantity,
@@ -71,7 +71,8 @@ func validateQuery(command entity.Command, args []string) error {
 		match, _ := regexp.Match(entity.ArgPattern, []byte(arg))
 		if !match {
 			return fmt.Errorf(
-				"arg %d conrains invalid symbols, you can enter only letters, numbers, '/', '*' and '_'",
+				"%w: arg %d contains invalid symbols",
+				entity.ErrInvalidArgumentSymbols,
 				i+1,
 			)
 		}

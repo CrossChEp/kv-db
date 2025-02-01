@@ -14,7 +14,7 @@ type zapAdapter struct {
 	log *zap.SugaredLogger
 }
 
-func newZaoAdapter(o options) *zapAdapter {
+func newZapAdapter(o options) *zapAdapter {
 	level := levelToZapLevel[o.level]
 
 	encoderConfig := zapcore.EncoderConfig{

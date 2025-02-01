@@ -14,7 +14,7 @@ func New(opts ...Option) *Logger {
 	}
 
 	if o.adapter == nil {
-		o.adapter = newZaoAdapter(o)
+		o.adapter = newZapAdapter(o)
 	}
 
 	return &Logger{
