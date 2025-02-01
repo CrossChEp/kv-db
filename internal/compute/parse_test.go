@@ -2,10 +2,12 @@ package compute
 
 import (
 	"context"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+
 	"github.com/CrossChEp/kv-db/internal/entity"
 	testUtils "github.com/CrossChEp/kv-db/internal/utils/test_utils"
-	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestParser_Parse(t *testing.T) {
