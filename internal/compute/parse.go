@@ -31,7 +31,10 @@ func (p *Parser) Parse(ctx context.Context, query string) (entity.Query, error) 
 	command := entity.Command(parts[0])
 	args := parts[1:]
 
-	ctx = p.log.WithFields(ctx, fields.Join())
+	ctx = p.log.WithFields(ctx, fields.Join(
+		fields.WithArgs(args),
+		fields.WithCommand(command),
+	))
 
 	if err = validateQuery(command, args); err != nil {
 		return entity.Query{}, err
