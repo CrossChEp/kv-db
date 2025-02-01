@@ -42,6 +42,7 @@ func (p *Parser) Parse(ctx context.Context, query string) (entity.Query, error) 
 
 	var (
 		val       string
+		key                        = args[0]
 		queryType entity.QueryType = entity.CommandToType[command]
 	)
 
@@ -51,7 +52,7 @@ func (p *Parser) Parse(ctx context.Context, query string) (entity.Query, error) 
 
 	return entity.Query{
 		Type: queryType,
-		Key:  args[0],
+		Key:  key,
 		Val:  val,
 	}, nil
 }
