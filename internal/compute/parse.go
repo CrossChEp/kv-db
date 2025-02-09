@@ -3,9 +3,9 @@ package compute
 import (
 	"context"
 	"fmt"
-	"regexp"
 	"slices"
 	"strings"
+	"unicode"
 
 	"github.com/CrossChEp/kv-db/internal/entity"
 	"github.com/CrossChEp/kv-db/internal/fields"
@@ -72,15 +72,28 @@ func validateQuery(command entity.Command, args []string) error {
 	}
 
 	for i, arg := range args {
-		match, _ := regexp.Match(entity.ArgPattern, []byte(arg))
-		if !match {
-			return fmt.Errorf(
-				"%w: arg %d contains invalid symbols",
-				entity.ErrInvalidArgumentSymbols,
-				i+1,
-			)
+		for _, ch := range arg {
+			if !validateChar(ch) {
+				return fmt.Errorf(
+					"%w: arg %d contains invalid symbols",
+					entity.ErrInvalidArgumentSymbols,
+					i+1,
+				)
+			}
 		}
+		//match, _ := regexp.Match(entity.ArgPattern, []byte(arg))
+		//if !match {
+		//	return fmt.Errorf(
+		//		"%w: arg %d contains invalid symbols",
+		//		entity.ErrInvalidArgumentSymbols,
+		//		i+1,
+		//	)
+		//}
 	}
 
 	return nil
+}
+
+func validateChar(r rune) bool {
+	return unicode.IsLetter(r) || unicode.IsDigit(r) || strings.ContainsRune("/*_-", r)
 }

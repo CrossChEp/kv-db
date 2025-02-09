@@ -2,6 +2,7 @@ package logger
 
 import (
 	"io"
+	"os"
 
 	"go.uber.org/zap/zapcore"
 )
@@ -46,6 +47,15 @@ func WithLogFormat(format int) Option {
 	return func(opt *options) {
 		opt.format = format
 	}
+}
+
+func WithFileOutput(filePath string) (io.Writer, *os.File, error) {
+	file, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return file, file, nil
 }
 
 func WithOutput(out io.Writer) Option {

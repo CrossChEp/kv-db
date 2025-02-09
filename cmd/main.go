@@ -1,7 +1,7 @@
 package main
 
 import (
-	"os"
+	"context"
 
 	"github.com/CrossChEp/kv-db/internal/compute"
 	"github.com/CrossChEp/kv-db/internal/config"
@@ -12,17 +12,17 @@ import (
 
 func main() {
 	cfg := config.New()
+	ctx := context.Background()
 
-	file, err := os.OpenFile(cfg.LogPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	logOutput, file, err := logger.WithFileOutput(cfg.LogPath)
 	if err != nil {
 		panic(err)
 	}
-
 	defer file.Close()
 
 	log := logger.New(
 		logger.WithLogFormat(logger.TextFormat),
-		logger.WithOutput(file),
+		logger.WithOutput(logOutput),
 	)
 
 	engine := engine.New()
@@ -30,5 +30,5 @@ func main() {
 
 	db := database.New(log, parser, engine)
 
-	db.Start()
+	db.Start(ctx)
 }

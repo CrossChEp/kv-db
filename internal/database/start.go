@@ -7,12 +7,10 @@ import (
 	"strings"
 )
 
-func (db *Database) Start() {
+func (db *Database) Start(ctx context.Context) {
 	reader := bufio.NewReader(os.Stdin)
 	writer := bufio.NewWriter(os.Stdout)
 	writerErr := bufio.NewWriter(os.Stderr)
-
-	ctx := context.Background()
 
 	for {
 		query, err := reader.ReadString('\n')
