@@ -81,14 +81,6 @@ func validateQuery(command entity.Command, args []string) error {
 				)
 			}
 		}
-		//match, _ := regexp.Match(entity.ArgPattern, []byte(arg))
-		//if !match {
-		//	return fmt.Errorf(
-		//		"%w: arg %d contains invalid symbols",
-		//		entity.ErrInvalidArgumentSymbols,
-		//		i+1,
-		//	)
-		//}
 	}
 
 	return nil
