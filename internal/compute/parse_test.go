@@ -79,8 +79,8 @@ func TestParser_Parse(t *testing.T) {
 
 			res, err := p.Parse(context.Background(), tc.in)
 
-			require.Equal(t, tc.out, res)
 			require.ErrorIs(t, err, tc.expectedErr)
+			require.Equal(t, tc.out, res)
 		})
 	}
 }
